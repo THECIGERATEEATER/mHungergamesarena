@@ -19,6 +19,7 @@ controller.player4.onEvent(ControllerEvent.Connected, function () {
     controller.player4.moveSprite(Player4)
 })
 controller.player3.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
+    scene.cameraFollowSprite(Player3)
     if (p3_b > 0) {
         sword2 = sprites.createProjectileFromSprite(img`
             . . . . . . . . . . . . . f f f 
@@ -63,6 +64,7 @@ controller.player3.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Press
     sprites.destroy(sword2)
 })
 controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
+    scene.cameraFollowSprite(Player2)
     if (p2_b > 0) {
         sword2 = sprites.createProjectileFromSprite(img`
             . . . . . . . . . . . . . f f f 
@@ -107,6 +109,7 @@ controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Press
     sprites.destroy(sword2)
 })
 controller.player4.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
+    scene.cameraFollowSprite(Player4)
     if (p4_b > 0) {
         sword2 = sprites.createProjectileFromSprite(img`
             . . . . . . . . . . . . . f f f 
@@ -151,6 +154,7 @@ controller.player4.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Press
     sprites.destroy(sword2)
 })
 controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    scene.cameraFollowSprite(Player2)
     if (p2_b > 0) {
         Arrow = sprites.createProjectileFromSprite(img`
             . . . . . . . . 
@@ -233,6 +237,7 @@ sprites.onOverlap(SpriteKind.Player_3, SpriteKind.Projectile, function (sprite3,
     sprites.destroy(sword2)
 })
 controller.player4.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    scene.cameraFollowSprite(Player4)
     if (p4_b > 0) {
         Arrow = sprites.createProjectileFromSprite(img`
             . . . . . . . . 
@@ -267,6 +272,7 @@ controller.player1.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.P
     P1_b = 15
 })
 controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    scene.cameraFollowSprite(Player1)
     if (P1_b > 0) {
         Arrow = sprites.createProjectileFromSprite(img`
             . . . . . . . . 
@@ -301,6 +307,7 @@ info.player1.onLifeZero(function () {
     Send_Player_1_to_the_shadow_realm2()
 })
 controller.player3.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
+    scene.cameraFollowSprite(Player3)
     if (p3_b > 0) {
         Arrow = sprites.createProjectileFromSprite(img`
             . . . . . . . . 
@@ -334,6 +341,7 @@ controller.player2.onEvent(ControllerEvent.Connected, function () {
     controller.player2.moveSprite(Player2)
 })
 controller.player1.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
+    scene.cameraFollowSprite(Player1)
     if (P1_b > 0) {
         sword2 = sprites.createProjectileFromSprite(img`
             . . . . . . . . . . . . . f f f 
@@ -392,6 +400,7 @@ controller.player1.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pr
     P1_a = -50
     P1_b = -15
 })
+let mySprite: Sprite = null
 let p4_a = 0
 let p4_b = 0
 let p3_a = 0
@@ -411,23 +420,25 @@ let Player2: Sprite = null
 let Player1: Sprite = null
 let Arrow: Sprite = null
 tiles.setCurrentTilemap(tilemap`arena`)
+let debug = 0
+splitScreen.setSplitScreenEnabled(true)
 Arrow = sprites.create(img`
     . . . . . . . . 
-    b . . . . . . . 
-    . b . . . . 1 . 
-    . . e e e e 1 1 
-    . b . . . . 1 . 
-    b . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
     . . . . . . . . 
     . . . . . . . . 
     `, SpriteKind.Projectile)
 let Arrow_22 = sprites.create(img`
     . . . . . . . . 
-    b . . . . . . . 
-    . b . . . . 1 . 
-    . . e e e e 1 1 
-    . b . . . . 1 . 
-    b . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
     . . . . . . . . 
     . . . . . . . . 
     `, SpriteKind.Projectile_2)
@@ -503,14 +514,12 @@ Player4 = sprites.create(img`
     . . . . . . e . . e . . . . . . 
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player_4)
-sprites.destroy(Arrow)
-sprites.destroy(Arrow_22)
 Pointer_1 = sprites.create(img`
-    . . 7 . . 
-    . . 7 . . 
-    7 7 7 7 7 
-    . . 7 . . 
-    . . 7 . . 
+    . . f . . 
+    . . f . . 
+    f f f f f 
+    . . f . . 
+    . . f . . 
     `, SpriteKind.Arrow_1)
 Pointer_2 = sprites.create(img`
     . . 7 . . 
@@ -563,6 +572,33 @@ p3_b = 999999999
 p3_a = 999999999
 p4_b = 999999999
 p4_a = 999999999
+if (debug == 0) {
+    splitScreen.cameraFollowSprite(splitScreen.Camera.Camera1, Player1)
+    splitScreen.cameraFollowSprite(splitScreen.Camera.Camera2, Player2)
+    splitScreen.cameraFollowSprite(splitScreen.Camera.Camera3, Player3)
+    splitScreen.cameraFollowSprite(splitScreen.Camera.Camera4, Player4)
+} else {
+    mySprite = sprites.create(img`
+        . . . . . . . f f . . . . . . . 
+        . . . . . . f 7 7 f . . . . . . 
+        . . . . . . f 7 7 f . . . . . . 
+        . . . . . . f 7 7 f . . . . . . 
+        . . . . . . f 7 7 f . . . . . . 
+        . . . . . f f 7 7 f f . . . . . 
+        . f f f f f 7 7 7 7 f f f f f . 
+        f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+        f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
+        . f f f f f 7 7 7 7 f f f f f . 
+        . . . . . f f 7 7 f f . . . . . 
+        . . . . . . f 7 7 f . . . . . . 
+        . . . . . . f 7 7 f . . . . . . 
+        . . . . . . f 7 7 f . . . . . . 
+        . . . . . . f 7 7 f . . . . . . 
+        . . . . . . . f f . . . . . . . 
+        `, SpriteKind.Food)
+    controller.player1.moveSprite(mySprite, 200, 200)
+    scene.cameraFollowSprite(mySprite)
+}
 forever(function () {
     Pointer_2.setPosition(Player2.x + p2_b, Player2.y)
 })
