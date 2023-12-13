@@ -419,6 +419,7 @@ let Player3: Sprite = null
 let Player2: Sprite = null
 let Player1: Sprite = null
 let Arrow: Sprite = null
+splitScreen.setSplitScreenEnabled(true)
 tiles.setCurrentTilemap(tilemap`arena`)
 let debug = 0
 splitScreen.setSplitScreenEnabled(true)
@@ -542,10 +543,10 @@ Pointer_4 = sprites.create(img`
     . . 7 . . 
     . . 7 . . 
     `, SpriteKind.Arrow_4)
-info.player1.setLife(10)
-info.player2.setLife(10)
-info.player3.setLife(10)
-info.player4.setLife(10)
+info.player1.setLife(randint(1, 10))
+info.player2.setLife(randint(1, 10))
+info.player3.setLife(randint(1, 10))
+info.player4.setLife(randint(1, 10))
 sword2 = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
