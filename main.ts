@@ -9,427 +9,389 @@ namespace SpriteKind {
     export const Arrow_4 = SpriteKind.create()
     export const Player_3 = SpriteKind.create()
 }
-
-//  Todo: Make health pickups
-sprites.onOverlap(SpriteKind.Player_2, SpriteKind.Projectile, function on_on_overlap(sprite: Sprite, otherSprite: Sprite) {
+// Todo: Make health pickups
+sprites.onOverlap(SpriteKind.Player_2, SpriteKind.Projectile, function (sprite, otherSprite) {
     info.player2.changeLifeBy(-1)
     sprites.destroy(Arrow)
     sprites.destroy(sword2)
 })
-controller.player4.onEvent(ControllerEvent.Connected, function on_player4_connected() {
+controller.player4.onEvent(ControllerEvent.Connected, function () {
     controller.player4.moveSprite(Player4)
 })
-controller.player3.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function on_player3_button_b_pressed() {
-    
-    scene.cameraFollowSprite(Player3)
+controller.player3.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
     if (p3_b > 0) {
         sword2 = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . f f f 
-                            . . . . . . . . . . . . f 1 1 f 
-                            . . . . . . . . . . . f 1 1 1 f 
-                            . . . . . . . . . . f 1 1 1 f . 
-                            . . . . . . . . . f 1 1 1 f . . 
-                            . . . . . . . . f 1 1 1 f . . . 
-                            . . f f . . . f 1 1 1 f . . . . 
-                            . . f f f . f 1 1 1 f . . . . . 
-                            . . . f f f 1 1 1 f . . . . . . 
-                            . . . f f f 1 1 f . . . . . . . 
-                            . . . . f f f f . . . . . . . . 
-                            . . . e e f f f f . . . . . . . 
-                            . . e e e . f f f f . . . . . . 
-                            f f e e . . . . f f . . . . . . 
-                            f f f . . . . . . . . . . . . . 
-                            f f f . . . . . . . . . . . . .
+            . . . . . . . . . . . . . f f f 
+            . . . . . . . . . . . . f 1 1 f 
+            . . . . . . . . . . . f 1 1 1 f 
+            . . . . . . . . . . f 1 1 1 f . 
+            . . . . . . . . . f 1 1 1 f . . 
+            . . . . . . . . f 1 1 1 f . . . 
+            . . f f . . . f 1 1 1 f . . . . 
+            . . f f f . f 1 1 1 f . . . . . 
+            . . . f f f 1 1 1 f . . . . . . 
+            . . . f f f 1 1 f . . . . . . . 
+            . . . . f f f f . . . . . . . . 
+            . . . e e f f f f . . . . . . . 
+            . . e e e . f f f f . . . . . . 
+            f f e e . . . . f f . . . . . . 
+            f f f . . . . . . . . . . . . . 
+            f f f . . . . . . . . . . . . . 
             `, Player3, p3_b * 5, 0)
     } else {
         sword2 = sprites.createProjectileFromSprite(img`
-                f f f . . . . . . . . . . . . . 
-                            f 1 1 f . . . . . . . . . . . . 
-                            f 1 1 1 f . . . . . . . . . . . 
-                            . f 1 1 1 f . . . . . . . . . . 
-                            . . f 1 1 1 f . . . . . . . . . 
-                            . . . f 1 1 1 f . . . . . . . . 
-                            . . . . f 1 1 1 f . . . f f . . 
-                            . . . . . f 1 1 1 f . f f f . . 
-                            . . . . . . f 1 1 1 f f f . . . 
-                            . . . . . . . f 1 1 f f f . . . 
-                            . . . . . . . . f f f f . . . . 
-                            . . . . . . . f f f f e e . . . 
-                            . . . . . . f f f f . e e e . . 
-                            . . . . . . f f . . . . e e f f 
-                            . . . . . . . . . . . . . f f f 
-                            . . . . . . . . . . . . . f f f
+            f f f . . . . . . . . . . . . . 
+            f 1 1 f . . . . . . . . . . . . 
+            f 1 1 1 f . . . . . . . . . . . 
+            . f 1 1 1 f . . . . . . . . . . 
+            . . f 1 1 1 f . . . . . . . . . 
+            . . . f 1 1 1 f . . . . . . . . 
+            . . . . f 1 1 1 f . . . f f . . 
+            . . . . . f 1 1 1 f . f f f . . 
+            . . . . . . f 1 1 1 f f f . . . 
+            . . . . . . . f 1 1 f f f . . . 
+            . . . . . . . . f f f f . . . . 
+            . . . . . . . f f f f e e . . . 
+            . . . . . . f f f f . e e e . . 
+            . . . . . . f f . . . . e e f f 
+            . . . . . . . . . . . . . f f f 
+            . . . . . . . . . . . . . f f f 
             `, Player3, p3_b * 5, 0)
     }
-    
     sword2.x += p3_b
     pause(100)
     sprites.destroy(sword2)
 })
-controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function on_player2_button_b_pressed() {
-    
-    scene.cameraFollowSprite(Player2)
+controller.player2.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
     if (p2_b > 0) {
         sword2 = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . f f f 
-                            . . . . . . . . . . . . f 1 1 f 
-                            . . . . . . . . . . . f 1 1 1 f 
-                            . . . . . . . . . . f 1 1 1 f . 
-                            . . . . . . . . . f 1 1 1 f . . 
-                            . . . . . . . . f 1 1 1 f . . . 
-                            . . f f . . . f 1 1 1 f . . . . 
-                            . . f f f . f 1 1 1 f . . . . . 
-                            . . . f f f 1 1 1 f . . . . . . 
-                            . . . f f f 1 1 f . . . . . . . 
-                            . . . . f f f f . . . . . . . . 
-                            . . . e e f f f f . . . . . . . 
-                            . . e e e . f f f f . . . . . . 
-                            f f e e . . . . f f . . . . . . 
-                            f f f . . . . . . . . . . . . . 
-                            f f f . . . . . . . . . . . . .
+            . . . . . . . . . . . . . f f f 
+            . . . . . . . . . . . . f 1 1 f 
+            . . . . . . . . . . . f 1 1 1 f 
+            . . . . . . . . . . f 1 1 1 f . 
+            . . . . . . . . . f 1 1 1 f . . 
+            . . . . . . . . f 1 1 1 f . . . 
+            . . f f . . . f 1 1 1 f . . . . 
+            . . f f f . f 1 1 1 f . . . . . 
+            . . . f f f 1 1 1 f . . . . . . 
+            . . . f f f 1 1 f . . . . . . . 
+            . . . . f f f f . . . . . . . . 
+            . . . e e f f f f . . . . . . . 
+            . . e e e . f f f f . . . . . . 
+            f f e e . . . . f f . . . . . . 
+            f f f . . . . . . . . . . . . . 
+            f f f . . . . . . . . . . . . . 
             `, Player2, p2_b * 5, 0)
     } else {
         sword2 = sprites.createProjectileFromSprite(img`
-                f f f . . . . . . . . . . . . . 
-                            f 1 1 f . . . . . . . . . . . . 
-                            f 1 1 1 f . . . . . . . . . . . 
-                            . f 1 1 1 f . . . . . . . . . . 
-                            . . f 1 1 1 f . . . . . . . . . 
-                            . . . f 1 1 1 f . . . . . . . . 
-                            . . . . f 1 1 1 f . . . f f . . 
-                            . . . . . f 1 1 1 f . f f f . . 
-                            . . . . . . f 1 1 1 f f f . . . 
-                            . . . . . . . f 1 1 f f f . . . 
-                            . . . . . . . . f f f f . . . . 
-                            . . . . . . . f f f f e e . . . 
-                            . . . . . . f f f f . e e e . . 
-                            . . . . . . f f . . . . e e f f 
-                            . . . . . . . . . . . . . f f f 
-                            . . . . . . . . . . . . . f f f
+            f f f . . . . . . . . . . . . . 
+            f 1 1 f . . . . . . . . . . . . 
+            f 1 1 1 f . . . . . . . . . . . 
+            . f 1 1 1 f . . . . . . . . . . 
+            . . f 1 1 1 f . . . . . . . . . 
+            . . . f 1 1 1 f . . . . . . . . 
+            . . . . f 1 1 1 f . . . f f . . 
+            . . . . . f 1 1 1 f . f f f . . 
+            . . . . . . f 1 1 1 f f f . . . 
+            . . . . . . . f 1 1 f f f . . . 
+            . . . . . . . . f f f f . . . . 
+            . . . . . . . f f f f e e . . . 
+            . . . . . . f f f f . e e e . . 
+            . . . . . . f f . . . . e e f f 
+            . . . . . . . . . . . . . f f f 
+            . . . . . . . . . . . . . f f f 
             `, Player2, p2_b * 5, 0)
     }
-    
     sword2.x += p2_b
     pause(100)
     sprites.destroy(sword2)
 })
-controller.player4.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function on_player4_button_b_pressed() {
-    
-    scene.cameraFollowSprite(Player4)
+controller.player4.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
     if (p4_b > 0) {
         sword2 = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . f f f 
-                            . . . . . . . . . . . . f 1 1 f 
-                            . . . . . . . . . . . f 1 1 1 f 
-                            . . . . . . . . . . f 1 1 1 f . 
-                            . . . . . . . . . f 1 1 1 f . . 
-                            . . . . . . . . f 1 1 1 f . . . 
-                            . . f f . . . f 1 1 1 f . . . . 
-                            . . f f f . f 1 1 1 f . . . . . 
-                            . . . f f f 1 1 1 f . . . . . . 
-                            . . . f f f 1 1 f . . . . . . . 
-                            . . . . f f f f . . . . . . . . 
-                            . . . e e f f f f . . . . . . . 
-                            . . e e e . f f f f . . . . . . 
-                            f f e e . . . . f f . . . . . . 
-                            f f f . . . . . . . . . . . . . 
-                            f f f . . . . . . . . . . . . .
+            . . . . . . . . . . . . . f f f 
+            . . . . . . . . . . . . f 1 1 f 
+            . . . . . . . . . . . f 1 1 1 f 
+            . . . . . . . . . . f 1 1 1 f . 
+            . . . . . . . . . f 1 1 1 f . . 
+            . . . . . . . . f 1 1 1 f . . . 
+            . . f f . . . f 1 1 1 f . . . . 
+            . . f f f . f 1 1 1 f . . . . . 
+            . . . f f f 1 1 1 f . . . . . . 
+            . . . f f f 1 1 f . . . . . . . 
+            . . . . f f f f . . . . . . . . 
+            . . . e e f f f f . . . . . . . 
+            . . e e e . f f f f . . . . . . 
+            f f e e . . . . f f . . . . . . 
+            f f f . . . . . . . . . . . . . 
+            f f f . . . . . . . . . . . . . 
             `, Player4, p4_b * 5, 0)
     } else {
         sword2 = sprites.createProjectileFromSprite(img`
-                f f f . . . . . . . . . . . . . 
-                            f 1 1 f . . . . . . . . . . . . 
-                            f 1 1 1 f . . . . . . . . . . . 
-                            . f 1 1 1 f . . . . . . . . . . 
-                            . . f 1 1 1 f . . . . . . . . . 
-                            . . . f 1 1 1 f . . . . . . . . 
-                            . . . . f 1 1 1 f . . . f f . . 
-                            . . . . . f 1 1 1 f . f f f . . 
-                            . . . . . . f 1 1 1 f f f . . . 
-                            . . . . . . . f 1 1 f f f . . . 
-                            . . . . . . . . f f f f . . . . 
-                            . . . . . . . f f f f e e . . . 
-                            . . . . . . f f f f . e e e . . 
-                            . . . . . . f f . . . . e e f f 
-                            . . . . . . . . . . . . . f f f 
-                            . . . . . . . . . . . . . f f f
+            f f f . . . . . . . . . . . . . 
+            f 1 1 f . . . . . . . . . . . . 
+            f 1 1 1 f . . . . . . . . . . . 
+            . f 1 1 1 f . . . . . . . . . . 
+            . . f 1 1 1 f . . . . . . . . . 
+            . . . f 1 1 1 f . . . . . . . . 
+            . . . . f 1 1 1 f . . . f f . . 
+            . . . . . f 1 1 1 f . f f f . . 
+            . . . . . . f 1 1 1 f f f . . . 
+            . . . . . . . f 1 1 f f f . . . 
+            . . . . . . . . f f f f . . . . 
+            . . . . . . . f f f f e e . . . 
+            . . . . . . f f f f . e e e . . 
+            . . . . . . f f . . . . e e f f 
+            . . . . . . . . . . . . . f f f 
+            . . . . . . . . . . . . . f f f 
             `, Player4, p4_b * 5, 0)
     }
-    
     sword2.x += p4_b
     pause(100)
     sprites.destroy(sword2)
 })
-controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function on_player2_button_a_pressed() {
-    
-    scene.cameraFollowSprite(Player2)
+controller.player2.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     if (p2_b > 0) {
         Arrow = sprites.createProjectileFromSprite(img`
-                . . . . . . . . 
-                            b . . . . . . . 
-                            . b . . . . 1 . 
-                            . . e e e e 1 1 
-                            . b . . . . 1 . 
-                            b . . . . . . . 
-                            . . . . . . . . 
-                            . . . . . . . .
+            . . . . . . . . 
+            b . . . . . . . 
+            . b . . . . 1 . 
+            . . e e e e 1 1 
+            . b . . . . 1 . 
+            b . . . . . . . 
+            . . . . . . . . 
+            . . . . . . . . 
             `, Player2, p2_a, 0)
     } else {
         Arrow = sprites.createProjectileFromSprite(img`
-                . . . . . . . . 
-                            . . . . . . . b 
-                            . 1 . . . . b . 
-                            1 1 e e e e . . 
-                            . 1 . . . . b . 
-                            . . . . . . . b 
-                            . . . . . . . . 
-                            . . . . . . . .
+            . . . . . . . . 
+            . . . . . . . b 
+            . 1 . . . . b . 
+            1 1 e e e e . . 
+            . 1 . . . . b . 
+            . . . . . . . b 
+            . . . . . . . . 
+            . . . . . . . . 
             `, Player2, p2_a, 0)
     }
-    
     Arrow.x += p2_b
 })
-info.player4.onLifeZero(function on_player4_life_zero() {
+info.player4.onLifeZero(function () {
     sprites.destroy(Pointer_4)
     Send_Player_4_to_the_shadow_realm3()
 })
-function Send_Player_2_to_the_shadow_realm() {
+function Send_Player_2_to_the_shadow_realm () {
     for (let index = 0; index < 15; index++) {
         Player2.x += 1e+21
     }
 }
-
-function Send_Player_1_to_the_shadow_realm2() {
-    for (let index2 = 0; index2 < 15; index2++) {
+function Send_Player_1_to_the_shadow_realm2 () {
+    for (let index = 0; index < 15; index++) {
         Player1.x += 1e+21
     }
 }
-
-function Send_Player_4_to_the_shadow_realm3() {
-    for (let index3 = 0; index3 < 15; index3++) {
+function Send_Player_4_to_the_shadow_realm3 () {
+    for (let index = 0; index < 15; index++) {
         Player4.x += 1e+21
     }
 }
-
-controller.player3.onEvent(ControllerEvent.Connected, function on_player3_connected() {
+controller.player3.onEvent(ControllerEvent.Connected, function () {
     controller.player3.moveSprite(Player3)
 })
-//  Todo: Make health pickups
-sprites.onOverlap(SpriteKind.Player_4, SpriteKind.Projectile, function on_on_overlap2(sprite2: Sprite, otherSprite2: Sprite) {
+// Todo: Make health pickups
+sprites.onOverlap(SpriteKind.Player_4, SpriteKind.Projectile, function (sprite2, otherSprite2) {
     info.player4.changeLifeBy(-1)
     sprites.destroy(Arrow)
     sprites.destroy(sword2)
 })
-controller.player3.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function on_player3_button_right_pressed() {
-    
+controller.player3.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
     p3_a = 50
     p3_b = 15
 })
-function Send_Player_3_to_the_shadow_realm4() {
-    for (let index4 = 0; index4 < 15; index4++) {
+function Send_Player_3_to_the_shadow_realm4 () {
+    for (let index = 0; index < 15; index++) {
         Player3.x += 1e+21
     }
 }
-
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function on_on_overlap3(sprite22: Sprite, otherSprite22: Sprite) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite22, otherSprite22) {
     info.player1.changeLifeBy(-1)
     sprites.destroy(Arrow)
     sprites.destroy(sword2)
 })
-controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function on_player2_button_right_pressed() {
-    
+controller.player2.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
     p2_a = 50
     p2_b = 15
 })
-info.player3.onLifeZero(function on_player3_life_zero() {
+info.player3.onLifeZero(function () {
     sprites.destroy(Pointer_3)
     Send_Player_3_to_the_shadow_realm4()
 })
-//  Todo: Make health pickups
-sprites.onOverlap(SpriteKind.Player_3, SpriteKind.Projectile, function on_on_overlap4(sprite3: Sprite, otherSprite3: Sprite) {
+// Todo: Make health pickups
+sprites.onOverlap(SpriteKind.Player_3, SpriteKind.Projectile, function (sprite3, otherSprite3) {
     info.player3.changeLifeBy(-1)
     sprites.destroy(Arrow)
     sprites.destroy(sword2)
 })
-controller.player4.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function on_player4_button_a_pressed() {
-    
-    scene.cameraFollowSprite(Player4)
+controller.player4.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     if (p4_b > 0) {
         Arrow = sprites.createProjectileFromSprite(img`
-                . . . . . . . . 
-                            b . . . . . . . 
-                            . b . . . . 1 . 
-                            . . e e e e 1 1 
-                            . b . . . . 1 . 
-                            b . . . . . . . 
-                            . . . . . . . . 
-                            . . . . . . . .
+            . . . . . . . . 
+            b . . . . . . . 
+            . b . . . . 1 . 
+            . . e e e e 1 1 
+            . b . . . . 1 . 
+            b . . . . . . . 
+            . . . . . . . . 
+            . . . . . . . . 
             `, Player4, p4_a, 0)
     } else {
         Arrow = sprites.createProjectileFromSprite(img`
-                . . . . . . . . 
-                            . . . . . . . b 
-                            . 1 . . . . b . 
-                            1 1 e e e e . . 
-                            . 1 . . . . b . 
-                            . . . . . . . b 
-                            . . . . . . . . 
-                            . . . . . . . .
+            . . . . . . . . 
+            . . . . . . . b 
+            . 1 . . . . b . 
+            1 1 e e e e . . 
+            . 1 . . . . b . 
+            . . . . . . . b 
+            . . . . . . . . 
+            . . . . . . . . 
             `, Player4, p4_a, 0)
     }
-    
     Arrow.x += p4_b
 })
-controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function on_player2_button_left_pressed() {
-    
+controller.player2.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
     p2_a = -50
     p2_b = -15
 })
-controller.player1.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function on_player1_button_right_pressed() {
-    
+controller.player1.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
     P1_a = 50
     P1_b = 15
 })
-controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function on_player1_button_a_pressed() {
-    
-    scene.cameraFollowSprite(Player1)
+controller.player1.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     if (P1_b > 0) {
         Arrow = sprites.createProjectileFromSprite(img`
-                . . . . . . . . 
-                            b . . . . . . . 
-                            . b . . . . 1 . 
-                            . . e e e e 1 1 
-                            . b . . . . 1 . 
-                            b . . . . . . . 
-                            . . . . . . . . 
-                            . . . . . . . .
+            . . . . . . . . 
+            b . . . . . . . 
+            . b . . . . 1 . 
+            . . e e e e 1 1 
+            . b . . . . 1 . 
+            b . . . . . . . 
+            . . . . . . . . 
+            . . . . . . . . 
             `, Player1, P1_a, 0)
     } else {
         Arrow = sprites.createProjectileFromSprite(img`
-                . . . . . . . . 
-                            . . . . . . . b 
-                            . 1 . . . . b . 
-                            1 1 e e e e . . 
-                            . 1 . . . . b . 
-                            . . . . . . . b 
-                            . . . . . . . . 
-                            . . . . . . . .
+            . . . . . . . . 
+            . . . . . . . b 
+            . 1 . . . . b . 
+            1 1 e e e e . . 
+            . 1 . . . . b . 
+            . . . . . . . b 
+            . . . . . . . . 
+            . . . . . . . . 
             `, Player1, P1_a, 0)
     }
-    
     Arrow.x += P1_b
 })
-controller.player4.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function on_player4_button_left_pressed() {
-    
+controller.player4.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
     p4_a = -50
     p4_b = -15
 })
-info.player1.onLifeZero(function on_player1_life_zero() {
+info.player1.onLifeZero(function () {
     sprites.destroy(Pointer_1)
     Send_Player_1_to_the_shadow_realm2()
 })
-controller.player3.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function on_player3_button_a_pressed() {
-    
-    scene.cameraFollowSprite(Player3)
+controller.player3.onButtonEvent(ControllerButton.A, ControllerButtonEvent.Pressed, function () {
     if (p3_b > 0) {
         Arrow = sprites.createProjectileFromSprite(img`
-                . . . . . . . . 
-                            b . . . . . . . 
-                            . b . . . . 1 . 
-                            . . e e e e 1 1 
-                            . b . . . . 1 . 
-                            b . . . . . . . 
-                            . . . . . . . . 
-                            . . . . . . . .
+            . . . . . . . . 
+            b . . . . . . . 
+            . b . . . . 1 . 
+            . . e e e e 1 1 
+            . b . . . . 1 . 
+            b . . . . . . . 
+            . . . . . . . . 
+            . . . . . . . . 
             `, Player3, p3_a, 0)
     } else {
         Arrow = sprites.createProjectileFromSprite(img`
-                . . . . . . . . 
-                            . . . . . . . b 
-                            . 1 . . . . b . 
-                            1 1 e e e e . . 
-                            . 1 . . . . b . 
-                            . . . . . . . b 
-                            . . . . . . . . 
-                            . . . . . . . .
+            . . . . . . . . 
+            . . . . . . . b 
+            . 1 . . . . b . 
+            1 1 e e e e . . 
+            . 1 . . . . b . 
+            . . . . . . . b 
+            . . . . . . . . 
+            . . . . . . . . 
             `, Player3, p3_a, 0)
     }
-    
     Arrow.x += p3_b
 })
-info.player2.onLifeZero(function on_player2_life_zero() {
+info.player2.onLifeZero(function () {
     sprites.destroy(Pointer_2)
     Send_Player_2_to_the_shadow_realm()
 })
-controller.player2.onEvent(ControllerEvent.Connected, function on_player2_connected() {
+controller.player2.onEvent(ControllerEvent.Connected, function () {
     controller.player2.moveSprite(Player2)
 })
-controller.player1.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function on_player1_button_b_pressed() {
-    
-    scene.cameraFollowSprite(Player1)
+controller.player1.onButtonEvent(ControllerButton.B, ControllerButtonEvent.Pressed, function () {
     if (P1_b > 0) {
         sword2 = sprites.createProjectileFromSprite(img`
-                . . . . . . . . . . . . . f f f 
-                            . . . . . . . . . . . . f 1 1 f 
-                            . . . . . . . . . . . f 1 1 1 f 
-                            . . . . . . . . . . f 1 1 1 f . 
-                            . . . . . . . . . f 1 1 1 f . . 
-                            . . . . . . . . f 1 1 1 f . . . 
-                            . . f f . . . f 1 1 1 f . . . . 
-                            . . f f f . f 1 1 1 f . . . . . 
-                            . . . f f f 1 1 1 f . . . . . . 
-                            . . . f f f 1 1 f . . . . . . . 
-                            . . . . f f f f . . . . . . . . 
-                            . . . e e f f f f . . . . . . . 
-                            . . e e e . f f f f . . . . . . 
-                            f f e e . . . . f f . . . . . . 
-                            f f f . . . . . . . . . . . . . 
-                            f f f . . . . . . . . . . . . .
+            . . . . . . . . . . . . . f f f 
+            . . . . . . . . . . . . f 1 1 f 
+            . . . . . . . . . . . f 1 1 1 f 
+            . . . . . . . . . . f 1 1 1 f . 
+            . . . . . . . . . f 1 1 1 f . . 
+            . . . . . . . . f 1 1 1 f . . . 
+            . . f f . . . f 1 1 1 f . . . . 
+            . . f f f . f 1 1 1 f . . . . . 
+            . . . f f f 1 1 1 f . . . . . . 
+            . . . f f f 1 1 f . . . . . . . 
+            . . . . f f f f . . . . . . . . 
+            . . . e e f f f f . . . . . . . 
+            . . e e e . f f f f . . . . . . 
+            f f e e . . . . f f . . . . . . 
+            f f f . . . . . . . . . . . . . 
+            f f f . . . . . . . . . . . . . 
             `, Player1, P1_b * 5, 0)
     } else {
         sword2 = sprites.createProjectileFromSprite(img`
-                f f f . . . . . . . . . . . . . 
-                            f 1 1 f . . . . . . . . . . . . 
-                            f 1 1 1 f . . . . . . . . . . . 
-                            . f 1 1 1 f . . . . . . . . . . 
-                            . . f 1 1 1 f . . . . . . . . . 
-                            . . . f 1 1 1 f . . . . . . . . 
-                            . . . . f 1 1 1 f . . . f f . . 
-                            . . . . . f 1 1 1 f . f f f . . 
-                            . . . . . . f 1 1 1 f f f . . . 
-                            . . . . . . . f 1 1 f f f . . . 
-                            . . . . . . . . f f f f . . . . 
-                            . . . . . . . f f f f e e . . . 
-                            . . . . . . f f f f . e e e . . 
-                            . . . . . . f f . . . . e e f f 
-                            . . . . . . . . . . . . . f f f 
-                            . . . . . . . . . . . . . f f f
+            f f f . . . . . . . . . . . . . 
+            f 1 1 f . . . . . . . . . . . . 
+            f 1 1 1 f . . . . . . . . . . . 
+            . f 1 1 1 f . . . . . . . . . . 
+            . . f 1 1 1 f . . . . . . . . . 
+            . . . f 1 1 1 f . . . . . . . . 
+            . . . . f 1 1 1 f . . . f f . . 
+            . . . . . f 1 1 1 f . f f f . . 
+            . . . . . . f 1 1 1 f f f . . . 
+            . . . . . . . f 1 1 f f f . . . 
+            . . . . . . . . f f f f . . . . 
+            . . . . . . . f f f f e e . . . 
+            . . . . . . f f f f . e e e . . 
+            . . . . . . f f . . . . e e f f 
+            . . . . . . . . . . . . . f f f 
+            . . . . . . . . . . . . . f f f 
             `, Player1, P1_b * 5, 0)
     }
-    
     sword2.x += P1_b
     pause(100)
     sprites.destroy(sword2)
 })
-controller.player1.onEvent(ControllerEvent.Connected, function on_player1_connected() {
+controller.player1.onEvent(ControllerEvent.Connected, function () {
     controller.player1.moveSprite(Player1)
 })
-controller.player4.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function on_player4_button_right_pressed() {
-    
+controller.player4.onButtonEvent(ControllerButton.Right, ControllerButtonEvent.Pressed, function () {
     p4_a = 50
     p4_b = 15
 })
-controller.player3.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function on_player3_button_left_pressed() {
-    
+controller.player3.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
     p3_a = -50
     p3_b = -15
 })
-controller.player1.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function on_player1_button_left_pressed() {
-    
+controller.player1.onButtonEvent(ControllerButton.Left, ControllerButtonEvent.Pressed, function () {
     P1_a = -50
     P1_b = -15
 })
-let mySprite : Sprite = null
 let p4_a = 0
 let p4_b = 0
 let p3_a = 0
@@ -438,159 +400,160 @@ let p2_a = 0
 let p2_b = 0
 let P1_a = 0
 let P1_b = 0
-let sword2 : Sprite = null
-let Pointer_4 : Sprite = null
-let Pointer_3 : Sprite = null
-let Pointer_2 : Sprite = null
-let Pointer_1 : Sprite = null
-let Player4 : Sprite = null
-let Player3 : Sprite = null
-let Player2 : Sprite = null
-let Player1 : Sprite = null
-let Arrow : Sprite = null
-let debug = 0
-splitScreen.setSplitScreenEnabled(true)
+let sword2: Sprite = null
+let Pointer_4: Sprite = null
+let Pointer_3: Sprite = null
+let Pointer_2: Sprite = null
+let Pointer_1: Sprite = null
+let Player4: Sprite = null
+let Player3: Sprite = null
+let Player2: Sprite = null
+let Player1: Sprite = null
+let Arrow: Sprite = null
+tiles.setCurrentTilemap(tilemap`arena`)
 Arrow = sprites.create(img`
-        . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . .
+    . . . . . . . . 
+    b . . . . . . . 
+    . b . . . . 1 . 
+    . . e e e e 1 1 
+    . b . . . . 1 . 
+    b . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
     `, SpriteKind.Projectile)
 let Arrow_22 = sprites.create(img`
-        . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . . 
-            . . . . . . . .
+    . . . . . . . . 
+    b . . . . . . . 
+    . b . . . . 1 . 
+    . . e e e e 1 1 
+    . b . . . . 1 . 
+    b . . . . . . . 
+    . . . . . . . . 
+    . . . . . . . . 
     `, SpriteKind.Projectile_2)
 Player1 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . e e e e e e . . . . . 
-            . . . . e e e e e e e e . . . . 
-            . . . . e e d d d d e e . . . . 
-            . . . . e d f d d f d e . . . . 
-            . . . . e d d d d d d e e . . . 
-            . . . . e e d d d d e e e . . . 
-            . . . . . f f f f f f . e e . . 
-            . . . . . d f f f f d . . e . . 
-            . . . . . d f f f f d . . . . . 
-            . . . . . d f f f f d . . . . . 
-            . . . . . . f f f f . . . . . . 
-            . . . . . . f . . f . . . . . . 
-            . . . . . . f . . f . . . . . .
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . e e e e e e . . . . . 
+    . . . . e e e e e e e e . . . . 
+    . . . . e e d d d d e e . . . . 
+    . . . . e d f d d f d e . . . . 
+    . . . . e d d d d d d e e . . . 
+    . . . . e e d d d d e e e . . . 
+    . . . . . f f f f f f . e e . . 
+    . . . . . d f f f f d . . e . . 
+    . . . . . d f f f f d . . . . . 
+    . . . . . d f f f f d . . . . . 
+    . . . . . . f f f f . . . . . . 
+    . . . . . . f . . f . . . . . . 
+    . . . . . . f . . f . . . . . . 
     `, SpriteKind.Player)
 Player2 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . 5 5 5 5 5 5 . . . . . 
-            . . . . 5 5 5 5 5 5 5 5 . . . . 
-            . . . . 5 5 d d d d 5 5 . . . . 
-            . . . . 5 d f d d f d 5 . . . . 
-            . . . . . d f d d f d . . . . . 
-            . . . . . . d d d d . . . . . . 
-            . . . . . f f f f f f . . . . . 
-            . . . . . f f f f f f . . . . . 
-            . . . . . d f f f f d . . . . . 
-            . . . . . d f f f f d . . . . . 
-            . . . . . . f . . f . . . . . . 
-            . . . . . . f . . f . . . . . . 
-            . . . . . f f . f f . . . . . . 
-            . . . . . f f . f f . . . . . .
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . 5 5 5 5 5 5 . . . . . 
+    . . . . 5 5 5 5 5 5 5 5 . . . . 
+    . . . . 5 5 d d d d 5 5 . . . . 
+    . . . . 5 d f d d f d 5 . . . . 
+    . . . . . d f d d f d . . . . . 
+    . . . . . . d d d d . . . . . . 
+    . . . . . f f f f f f . . . . . 
+    . . . . . f f f f f f . . . . . 
+    . . . . . d f f f f d . . . . . 
+    . . . . . d f f f f d . . . . . 
+    . . . . . . f . . f . . . . . . 
+    . . . . . . f . . f . . . . . . 
+    . . . . . f f . f f . . . . . . 
+    . . . . . f f . f f . . . . . . 
     `, SpriteKind.Player_2)
 Player3 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . f f f . . . . . . 
-            . . . . . . f f . . f . . . . . 
-            . . . . . . f . . . f . . . . . 
-            . . . . . . f . . . f . . . . . 
-            . . . . . . f . . f . . . . . . 
-            . . . . . . f f f . . . . . . . 
-            . . . . . f f f f f . . . . . . 
-            . . . . f f . . f f f . . . . . 
-            . . . f f . . . f . . f f . . . 
-            . . . . . . . . f . . . f . . . 
-            . . . . . . . . f . . . . . . . 
-            . . . . . . . . f . . . . . . . 
-            . . . . . . f f f f f . . . . . 
-            . . . . f f f . . . f f . . . .
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . f f f . . . . . . 
+    . . . . . . f f . . f . . . . . 
+    . . . . . . f . . . f . . . . . 
+    . . . . . . f . . . f . . . . . 
+    . . . . . . f . . f . . . . . . 
+    . . . . . . f f f . . . . . . . 
+    . . . . . f f f f f . . . . . . 
+    . . . . f f . . f f f . . . . . 
+    . . . f f . . . f . . f f . . . 
+    . . . . . . . . f . . . f . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . . . . f . . . . . . . 
+    . . . . . . f f f f f . . . . . 
+    . . . . f f f . . . f f . . . . 
     `, SpriteKind.Player_3)
 Player4 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . 4 4 4 4 . . . . . . 
-            . . . . . 4 4 4 4 4 4 . . . . . 
-            . . . . 4 4 d d d d 4 4 . . . . 
-            . . . . 4 d f d d f d 4 . . . . 
-            . . . . . d d d d d d . . . . . 
-            . . . . . . d d d d . . . . . . 
-            . . . . 2 2 2 2 2 2 2 2 . . . . 
-            . . . . d 2 2 2 2 2 2 d . . . . 
-            . . . . d d 2 2 2 2 d d . . . . 
-            . . . . d d 2 2 2 2 d d . . . . 
-            . . . . d . e . . e . d . . . . 
-            . . . . . . e . . e . . . . . . 
-            . . . . . . e . . e . . . . . . 
-            . . . . . f f . . f f . . . . .
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 4 4 4 4 . . . . . . 
+    . . . . . 4 4 4 4 4 4 . . . . . 
+    . . . . 4 4 d d d d 4 4 . . . . 
+    . . . . 4 d f d d f d 4 . . . . 
+    . . . . . d d d d d d . . . . . 
+    . . . . . . d d d d . . . . . . 
+    . . . . 2 2 2 2 2 2 2 2 . . . . 
+    . . . . d 2 2 2 2 2 2 d . . . . 
+    . . . . d d 2 2 2 2 d d . . . . 
+    . . . . d d 2 2 2 2 d d . . . . 
+    . . . . d . e . . e . d . . . . 
+    . . . . . . e . . e . . . . . . 
+    . . . . . . e . . e . . . . . . 
+    . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player_4)
+sprites.destroy(Arrow)
+sprites.destroy(Arrow_22)
 Pointer_1 = sprites.create(img`
-        . . f . . 
-            . . f . . 
-            f f f f f 
-            . . f . . 
-            . . f . .
+    . . 7 . . 
+    . . 7 . . 
+    7 7 7 7 7 
+    . . 7 . . 
+    . . 7 . . 
     `, SpriteKind.Arrow_1)
 Pointer_2 = sprites.create(img`
-        . . 7 . . 
-            . . 7 . . 
-            7 7 7 7 7 
-            . . 7 . . 
-            . . 7 . .
+    . . 7 . . 
+    . . 7 . . 
+    7 7 7 7 7 
+    . . 7 . . 
+    . . 7 . . 
     `, SpriteKind.Arrow_2)
 Pointer_3 = sprites.create(img`
-        . . 7 . . 
-            . . 7 . . 
-            7 7 7 7 7 
-            . . 7 . . 
-            . . 7 . .
+    . . 7 . . 
+    . . 7 . . 
+    7 7 7 7 7 
+    . . 7 . . 
+    . . 7 . . 
     `, SpriteKind.Arrow_2)
 Pointer_4 = sprites.create(img`
-        . . 7 . . 
-            . . 7 . . 
-            7 7 7 7 7 
-            . . 7 . . 
-            . . 7 . .
+    . . 7 . . 
+    . . 7 . . 
+    7 7 7 7 7 
+    . . 7 . . 
+    . . 7 . . 
     `, SpriteKind.Arrow_4)
-info.player1.setLife(randint(1, 10))
-info.player2.setLife(randint(1, 10))
-info.player3.setLife(randint(1, 10))
-info.player4.setLife(randint(1, 10))
+info.player1.setLife(10)
+info.player2.setLife(10)
+info.player3.setLife(10)
+info.player4.setLife(10)
 sword2 = sprites.create(img`
-        . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
     `, SpriteKind.sword)
 P1_b = 9999999
 P1_a = 999999999
@@ -600,43 +563,15 @@ p3_b = 999999999
 p3_a = 999999999
 p4_b = 999999999
 p4_a = 999999999
-if (debug == 0) {
-    splitScreen.cameraFollowSprite(splitScreen.Camera.Camera1, Player1)
-    splitScreen.cameraFollowSprite(splitScreen.Camera.Camera2, Player2)
-    splitScreen.cameraFollowSprite(splitScreen.Camera.Camera3, Player3)
-    splitScreen.cameraFollowSprite(splitScreen.Camera.Camera4, Player4)
-} else {
-    mySprite = sprites.create(img`
-            . . . . . . . f f . . . . . . . 
-                    . . . . . . f 7 7 f . . . . . . 
-                    . . . . . . f 7 7 f . . . . . . 
-                    . . . . . . f 7 7 f . . . . . . 
-                    . . . . . . f 7 7 f . . . . . . 
-                    . . . . . f f 7 7 f f . . . . . 
-                    . f f f f f 7 7 7 7 f f f f f . 
-                    f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
-                    f 7 7 7 7 7 7 7 7 7 7 7 7 7 7 f 
-                    . f f f f f 7 7 7 7 f f f f f . 
-                    . . . . . f f 7 7 f f . . . . . 
-                    . . . . . . f 7 7 f . . . . . . 
-                    . . . . . . f 7 7 f . . . . . . 
-                    . . . . . . f 7 7 f . . . . . . 
-                    . . . . . . f 7 7 f . . . . . . 
-                    . . . . . . . f f . . . . . . .
-        `, SpriteKind.Food)
-    controller.player1.moveSprite(mySprite, 200, 200)
-    scene.cameraFollowSprite(mySprite)
-}
-
-forever(function on_forever() {
+forever(function () {
     Pointer_2.setPosition(Player2.x + p2_b, Player2.y)
 })
-forever(function on_forever2() {
+forever(function () {
     Pointer_3.setPosition(Player3.x + p3_b, Player3.y)
 })
-forever(function on_forever3() {
+forever(function () {
     Pointer_1.setPosition(Player1.x + P1_b, Player1.y)
 })
-forever(function on_forever4() {
+forever(function () {
     Pointer_4.setPosition(Player4.x + p4_b, Player4.y)
 })
